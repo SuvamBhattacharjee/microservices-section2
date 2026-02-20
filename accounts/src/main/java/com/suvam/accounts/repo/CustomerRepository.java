@@ -1,4 +1,13 @@
 package com.suvam.accounts.repo;
 
-public class CustomerRepository {
+import com.suvam.accounts.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.net.InterfaceAddress;
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer,Long>
+{
+
 }
+
