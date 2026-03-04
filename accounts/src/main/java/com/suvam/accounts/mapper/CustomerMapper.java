@@ -4,6 +4,7 @@ import com.suvam.accounts.dto.CustomerDto;
 import com.suvam.accounts.entity.Customer;
 
 public class CustomerMapper {
+
     public static CustomerDto mapToCustomerDto(Customer customer, CustomerDto customerDto) {
         customerDto.setName(customer.getName());
         customerDto.setEmail(customer.getEmail());

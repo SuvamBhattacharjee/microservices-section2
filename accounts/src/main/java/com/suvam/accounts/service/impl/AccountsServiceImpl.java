@@ -1,6 +1,5 @@
 package com.suvam.accounts.service.impl;
 
-
 import com.suvam.accounts.constants.AccountsConstants;
 import com.suvam.accounts.dto.AccountsDto;
 import com.suvam.accounts.dto.CustomerDto;
@@ -16,7 +15,6 @@ import com.suvam.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -38,8 +36,6 @@ public class AccountsServiceImpl  implements IAccountsService {
             throw new CustomerAlreadyExistsException("Customer already registered with given mobileNumber "
                     +customerDto.getMobileNumber());
         }
-        customer.setCreatedAt(LocalDateTime.now());
-        customer.setCreatedBy("Anunymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
     }
@@ -56,8 +52,6 @@ public class AccountsServiceImpl  implements IAccountsService {
         newAccount.setAccountNumber(randomAccNumber);
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
-        newAccount.setCreatedAt(LocalDateTime.now());
-        newAccount.setCreatedBy("Anunymous");
         return newAccount;
     }
 
@@ -70,7 +64,7 @@ public class AccountsServiceImpl  implements IAccountsService {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
         );
-        Accounts accounts = (Accounts) accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
                 () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
         );
         CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());

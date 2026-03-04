@@ -2,11 +2,10 @@ package com.suvam.accounts.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
 @Entity
-@Getter@Setter@AllArgsConstructor@NoArgsConstructor
-public class Customer extends BaseEntity{
+@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
+public class Customer extends  BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +14,9 @@ public class Customer extends BaseEntity{
 
     private String name;
 
-    private String mobileNumber;
-
     private String email;
+
+    @Column(name="mobile_number")
+    private String mobileNumber;
 
 }
